@@ -1,7 +1,18 @@
 # Taxi-Fare-ML-Project
-
-This project uses a dataset given to me by my mentor Alan Cha for me to practice understanding and implementing Machine Learning algorithms.
-
-After conducting some thorough data processing and some basic cleaning, I used both a DecisionTreeRegressor and a RandomForestRegressor. 
-
-These ML models used a variety of input factors, such as the coordinates and timestamps of the start and end of the ride, to estimate the fare of the taxi.
+### Introduction ###
+This project uses data from taxi rides in San Francisco over the course of over a year to predict taxi fares.
+### My Mentor For The Project ###
+This project uses a dataset given to me by my mentor Alan Cha for me to practice understanding and implementing Machine Learning algorithms. Under his supervision, I read and researched important topics such as k-fold cross validation, overfitting, and feature engineering, to name a few. After learning about these topics, I began to apply them to this project. 
+## Beginning the Machine Learning Journey ##
+### Data Processing and Observations ###
+I split data into testing and training sets, then applied k-fold cross validation for varying values of k. I added new features using the existing information. For example, I was given a starting longitude and a starting latitude, and an ending longitude and an ending latitude. Combining these 4 and using some math, I added a column that held the total distance traveled. A similar process was applied to build the total ride time from the start and end time of the ride. 
+### Finding the Best Features ###
+Following this data processing, I began trying various combinations of features to identify the set that was most accurate. I ran through many different possibilities before slimming the set of reasonable features down siginificantly, then tested the accuracy of each feature using my first ML model - a DecisionTreeRegressor. Alan suggested I begin with that model, so I read through the documentation and began writing the code to use it. After a good amount of reading and debugging, it worked, so I ran the features through it to optimize the model.
+### A BIG Outlier ###
+At this point, I felt good about my results. I was getting accuracy numbers in the high 80s, and my wrong 'guesses' were, for the most part, pretty close. Looking closely at the starting locations of the rides, however, I noticed an anomaly. Something that was off, and wasn't small enough to dismiss. A blip of sorts stood south of the vast majority of starting locations. Plotting its coordinates into Google Maps, I realized that the little blip was actually the SFO Airport!
+### Responding to Changes ###
+The presence of the blip suddenly became clear - rides would often start in the SFO Airport and lead out to the city of San Francisco. Notably, taxis say that they charge a small fee for rides originating in the airport. Thus, any ride starting from the airport would have a charge greater than the norm. I added a new feature corresponding to whether the ride started or ended in the airport, and reran my model.
+### Iterating Through Improvements ###
+With this new feature, I found my accuracy jumped several percentage points almost immediately - on both training and validation sets. Here, Alan also suggested I try using some different models as well. On that guidance, I began exploring a few different types before settling on the RandomForestRegressor. With this model, my numbers got even better, and I was very happy with my results.
+## Moving Forward ##
+By this point, the semester was nearing an end, and I began to close up shop on this project. I still had things I wanted to try - new ML models, more features, integrating Google Maps, and detailed data cleaning (which, honestly, I'd neglected for most of this project). That said, I smiled when reflecting on how much I'd learned throughout this process. I'd found an incredible mentor, I'd captured the essentials and more of implementing a Machine Learning model and how to continually improve its performace, and I'd realized just how much fun I'd had throughout the process. I would often come to meetings tired but leave energized and intrigued with what I'd learned, eager to explore the impact of the topics we'd discussed that day. Maybe one day I'll come back to this and update it, but I love this project for giving me the introduction into a field I enjoy working in, and I'd like to leave it as is as a memento of my beginnings.
